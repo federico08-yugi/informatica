@@ -1,0 +1,42 @@
+	<html lang="en">
+	<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lezione 1 css</title>
+
+	<style>
+	#federicoheader{
+		height: 100px;
+		width: 100%;
+		border: 2px solid #4CAF50;
+		background-color: black
+	}
+	#federicofedericobody{
+		height: 100px;
+		width: 100%;
+		border: 2px solid #4CAF50;
+		background-color: red
+	}
+	#federicofoooter{
+		height: 100px;
+		width: 100%;
+		border: 2px solid #4CAF50;
+		background-color: orange
+	}
+	</style>
+	</head>
+	<body>
+		<div id=federicoheader>
+		<p>lezione su css </p>
+		</div>
+			<div id=federicobody>
+			<p>all'interno di questo quadratop posso inserire sezione per input e outpoot</p>
+			</div>
+				<div id=federicofoooter>
+				<p> all'interno di questo quadratop posso inserire sezione per input e outpoot</p>
+				</div>
+	
+	
+	
+	</body>
+	</html>
