@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+          font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .flip-card {
+          background-color: transparent;
+          width: 400px;
+          height: 400px;
+          perspective: 1000px;
+        }
+        
+        .flip-card-inner {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          transition: transform 0.6s;
+          transform-style: preserve-3d;
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+        
+        .flip-card:hover .flip-card-inner {
+          transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+        }
+        
+        .flip-card-front {
+          background-color: #bbb;
+          color: black;
+        }
+        
+        .flip-card-back {
+          background-color: #2980b9;
+          color: white;
+          transform: rotateY(180deg);
+        }
+        .flip-card2 {
+          background-color: transparent;
+          width: 400px;
+          height: 400px;
+          perspective: 1000px;
+        }
+        
+        .flip-card-inner2 {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          transition: transform 0.6s;
+          transform-style: preserve-3d;
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+        
+        .flip-card2:hover .flip-card-inner2 {
+          transform: rotateY(180deg);
+        }
+        
+        .flip-card-front2, .flip-card-back2 {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+        }
+        
+        .flip-card-front2 {
+          background-color: #bbb;
+          color: black;
+        }
+        
+        .flip-card-back2 {
+          background-color: #2980b9;
+          color: white;
+          transform: rotateY(180deg);
+        }
+        .flip-card3 {
+          background-color: transparent;
+          width: 400px;
+          height: 400px;
+          perspective: 1000px;
+        }
+        
+        .flip-card-inner3 {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          transition: transform 0.6s;
+          transform-style: preserve-3d;
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+        
+        .flip-card3:hover .flip-card-inner3 {
+          transform: rotateY(180deg);
+        }
+        
+        .flip-card-front3, .flip-card-back3 {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+        }
+        
+        .flip-card-front3 {
+          background-color: #bbb;
+          color: black;
+        }
+        
+        .flip-card-back3 {
+          background-color: #2980b9;
+          color: white;
+          transform: rotateY(180deg);
+        }
+        .flip-card4 {
+          background-color: transparent;
+          width: 400px;
+          height: 400px;
+          perspective: 1000px;
+        }
+        
+        .flip-card-inner4 {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          transition: transform 0.6s;
+          transform-style: preserve-3d;
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+        
+        .flip-card4:hover .flip-card-inner4 {
+          transform: rotateY(180deg);
+        }
+        
+        .flip-card-front4, .flip-card-back4 {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+        }
+        
+        .flip-card-front4 {
+          background-color: #bbb;
+          color: black;
+        }
+        
+        .flip-card-back4 {
+          background-color: #2980b9;
+          color: white;
+          transform: rotateY(180deg);
+        }
+        .flip-card5 {
+          background-color: transparent;
+          width: 400px;
+          height: 400px;
+          perspective: 1000px;
+        }
+        
+        .flip-card-inner5 {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          transition: transform 0.6s;
+          transform-style: preserve-3d;
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+        
+        .flip-card5:hover .flip-card-inner5 {
+          transform: rotateY(180deg);
+        }
+        
+        .flip-card-front5, .flip-card-back5 {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+        }
+        
+        .flip-card-front5 {
+          background-color: #bbb;
+          color: black;
+        }
+        
+        .flip-card-back5 {
+          background-color: #2980b9;
+          color: white;
+          transform: rotateY(180deg);
+        }
+        .flip-card6 {
+          background-color: transparent;
+          width: 400px;
+          height: 400px;
+          perspective: 1000px;
+        }
+        
+        .flip-card-inner6 {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          transition: transform 0.6s;
+          transform-style: preserve-3d;
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+        
+        .flip-card6:hover .flip-card-inner6 {
+          transform: rotateY(180deg);
+        }
+        
+        .flip-card-front6, .flip-card-back6 {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+        }
+        
+        .flip-card-front6 {
+          background-color: #bbb;
+          color: black;
+        }
+        
+        .flip-card-back6 {
+          background-color: #2980b9;
+          color: white;
+          transform: rotateY(180deg);
+        }
+        .flip-card7 {
+          background-color: transparent;
+          width: 400px;
+          height: 400px;
+          perspective: 1000px;
+        }
+        
+        .flip-card-inner7 {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          transition: transform 0.6s;
+          transform-style: preserve-3d;
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+        
+        .flip-card7:hover .flip-card-inner7 {
+          transform: rotateY(180deg);
+        }
+        
+        .flip-card-front7, .flip-card-back7 {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+        }
+        
+        .flip-card-front7 {
+          background-color: #bbb;
+          color: black;
+        }
+        
+        .flip-card-back7 {
+          background-color: #2980b9;
+          color: white;
+          transform: rotateY(180deg);
+        }
+        .flip-card8 {
+          background-color: transparent;
+          width: 400px;
+          height: 400px;
+          perspective: 1000px;
+        }
+        
+        .flip-card-inner8 {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          transition: transform 0.6s;
+          transform-style: preserve-3d;
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+        
+        .flip-card8:hover .flip-card-inner8 {
+          transform: rotateY(180deg);
+        }
+        
+        .flip-card-front8, .flip-card-back8 {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+        }
+        
+        .flip-card-front8 {
+          background-color: #bbb;
+          color: black;
+        }
+        
+        .flip-card-back8 {
+          background-color: #2980b9;
+          color: white;
+          transform: rotateY(180deg);
+        }
+        .flip-card9 {
+          background-color: transparent;
+          width: 400px;
+          height: 400px;
+          perspective: 1000px;
+        }
+        
+        .flip-card-inner9 {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          transition: transform 0.6s;
+          transform-style: preserve-3d;
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+        
+        .flip-card9:hover .flip-card-inner9 {
+          transform: rotateY(180deg);
+        }
+        
+        .flip-card-front9, .flip-card-back9 {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+        }
+        
+        .flip-card-front9 {
+          background-color: #bbb;
+          color: black;
+        }
+        
+        .flip-card-back9 {
+          background-color: #2980b9;
+          color: white;
+          transform: rotateY(180deg);
+        }
+        .flip-card10 {
+          background-color: transparent;
+          width: 400px;
+          height: 400px;
+          perspective: 1000px;
+        }
+        
+        .flip-card-inner10 {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          transition: transform 0.6s;
+          transform-style: preserve-3d;
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+        
+        .flip-card10:hover .flip-card-inner10 {
+          transform: rotateY(180deg);
+        }
+        
+        .flip-card-front10, .flip-card-back10 {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+        }
+        
+        .flip-card-front10 {
+          background-color: #bbb;
+          color: black;
+        }
+        
+        .flip-card-back10 {
+          background-color: #2980b9;
+          color: white;
+          transform: rotateY(180deg);
+        }
+        </style>
+</head>
+<body>
+    <h1>Card Flip with Text</h1>
+<h3>Hover over the image below:</h3>
+
+<div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <img src="razzo2.jpg" style="width:400px;height:400px;">
+    </div>
+    <div class="flip-card-back">
+      <h1></h1>
+      <p>Circa 370 milioni di dollari.</p>
+      <p>Il lancio inaugurale del razzo Ariane 5 dell'Agenzia Spaziale Europea fallì a causa di un bug nel software.</p>
+      <p>Il sistema di navigazione riutilizzava codice dall'Ariane 4, che non era stato adattato ai cambiamenti delle prestazioni del nuovo razzo. Ciò provocò un errore di overflow in una conversione di un numero a virgola mobile. Il razzo deviò dalla sua rotta e fu distrutto.</p>
+      <p>Perdita di un razzo da 370 milioni di dollari e di carichi utili scientifici di alto valore</p>
+    </div>
+</div>
+
+<div class="flip-card2">
+  <div class="flip-card-inner2">
+    <div class="flip-card-front2">
+      <img src="sonda.jpg" style="width:400px;height:400px;">
+    </div>
+  <div class="flip-card-back2">
+    <p>Circa 193 milioni di dollari.</p>
+    <p>Questo errore si verificò perché il software che controllava il sistema di navigazione del Mars Climate Orbiter utilizzava unità imperiali (libbre-forza secondi) invece di unità metriche (newton secondi). La sonda entrò nell'atmosfera di Marte troppo bassa e fu distrutta.</p>
+    <p>Perdita della sonda spaziale e della missione.</p>
+  </div>
+</div>
+
+<div class="flip-card3">
+  <div class="flip-card-inner3">
+    <div class="flip-card-front3">
+      <img src="borsa.jpg" style="width:400px;height:400px;">
+    </div>
+  <div class="flip-card-back3">
+    <p>Circa 440 milioni di dollari in 45 minuti</p>
+    <p>Knight Capital, una grande società di trading finanziario, installò un aggiornamento del software difettoso su uno dei suoi server. Questo software iniziò a fare milioni di operazioni di borsa errate, facendo crollare il prezzo delle azioni. L'azienda perse circa 440 milioni di dollari in meno di un'ora e fu successivamente acquisita.</p>
+    <p>Perdita finanziaria enorme e fine dell'azienda come entità indipendente.</p>
+  </div>
+</div>
+
+<div class="flip-card4">
+  <div class="flip-card-inner4">
+    <div class="flip-card-front4">
+      <img src="Therac.jpg" style="width:400px;height:400px;">
+    </div>
+  <div class="flip-card-back4">
+    <p>Diverse vite umane</p>
+    <p>Therac-25 era una macchina per la radioterapia utilizzata negli ospedali. A causa di bug nel software, in alcune circostanze la macchina somministrava dosi di radiazioni letali ai pazienti. Il bug si manifestava solo in determinate sequenze operative, quindi non fu scoperto subito.</p>
+    <p>Almeno 5 persone morirono e molte altre subirono gravi lesioni a causa di sovraesposizione alle radiazioni.</p>
+  </div>
+</div>
+
+<div class="flip-card5">
+  <div class="flip-card-inner5">
+    <div class="flip-card-front5">
+      <img src="attacco_terroristco.jpg" style="width:400px;height:400px;">
+    </div>
+  <div class="flip-card-back5">
+    <p>Perdita di vite e milioni di dollari</p>
+    <p>Un errore di arrotondamento in un sistema di temporizzazione del software del Patriot Missile causò il fallimento dell'intercettazione di un missile Scud iracheno. Il missile colpì una caserma dell'esercito statunitense, uccidendo 28 soldati.</p>
+    <p>Perdita di vite umane e di fiducia nella tecnologia di difesa.</p>
+  </div>
+</div>
+
+<div class="flip-card6">
+  <div class="flip-card-inner6">
+    <div class="flip-card-front6">
+      <img src="millenium_bug.jpg" style="width:400px;height:400px;">
+    </div>
+  <div class="flip-card-back6">
+    <p>Circa 100 miliardi di dollari in preparazione e mitigazione</p>
+    <p>Sebbene non ci sia stata una grande catastrofe, il "Millennium Bug" ha richiesto investimenti massicci per evitare il collasso dei sistemi informatici. Il bug era causato dal fatto che molti software utilizzavano solo le ultime due cifre dell'anno (es. '99 per 1999), il che poteva portare a malfunzionamenti passando all'anno 2000.</p>
+    <p>Anche se il bug non causò gravi danni, il costo per la prevenzione fu enorme.</p>
+  </div>
+</div>
+
+<div class="flip-card7">
+  <div class="flip-card-inner7">
+    <div class="flip-card-front7">
+      <img src="intel.jpg" style="width:400px;height:400px;">
+    </div>
+  <div class="flip-card-back7">
+    <p>Circa 475 milioni di dollari</p>
+    <p>Un bug nei processori Intel Pentium causava errori di calcolo nelle divisioni in virgola mobile. Questo difetto divenne un problema di pubbliche relazioni per Intel dopo che gli scienziati iniziarono a notare discrepanze nei loro calcoli. Intel alla fine dovette ritirare i processori difettosi e rimborsare i clienti.</p>
+    <p>Costi enormi di sostituzione e danno alla reputazione di Intel.</p>
+  </div>
+</div>
+
+<div class="flip-card8">
+  <div class="flip-card-inner8">
+    <div class="flip-card-front8">
+      <img src="TESLA_MODEL_S.jpg" style="width:400px;height:400px;">
+    </div>
+  <div class="flip-card-back8">
+    <p>Perdita di un'auto</p>
+    <p>Un aggiornamento del software del Tesla Model S causò il blocco dei freni a mano di alcune auto. In un caso, questo portò all'incendio e alla perdita completa di un'auto.</p>
+    <p>Danni materiali e possibili rischi per la sicurezza.</p>
+  </div>
+</div>
+
+<div class="flip-card9">
+  <div class="flip-card-inner9">
+    <div class="flip-card-front9">
+      <img src="AT&T.jpg" style="width:400px;height:400px;">
+    </div>
+    <div class="flip-card-back9">
+      <p>Decine di milioni di dollari</p>
+      <p>Un aggiornamento software difettoso nel sistema di commutazione di AT&T portò a un blocco che durò circa 9 ore. Durante questo periodo, milioni di chiamate telefoniche furono interrotte negli Stati Uniti.</p>
+      <p>Danno alla reputazione e perdite finanziarie per AT&T, oltre a disagio per milioni di ute</p>
+    </div>
+</div>
+
+<div class="flip-card10">
+    <div class="flip-card-inner10">
+        <div class="flip-card-front10">
+            <img src="SISTEMA_MCAS.jpg" style="width:400px;height:400px;">
+        </div>
+    <div class="flip-card-back10">
+      <h1></h1>
+      <p>Oltre 20 miliardi di dollari, molte vite perse</p>
+      <p>Il sistema MCAS (Maneuvering Characteristics Augmentation System) del Boeing 737 Max, progettato per correggere il comportamento di volo dell'aereo, aveva un bug che portava a una serie di incidenti aerei mortali. Questo errore portò alla perdita di controllo degli aerei in determinate situazioni, causando due incidenti fatali che uccisero 346 persone.</p>
+      <p>La Boeing subì gravi perdite economiche, danni alla reputazione e costi enormi per riparare il software e certificare nuovamente il modello. L’aereo fu bloccato a terra per quasi due anni.</p>
+    </div>
+</div>
+</body>
+</html>
