@@ -1,13 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"></html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .button1{
-            background-color: red;
-        }
+        .button {
+  background-color: #aa0404;
+  border: none;
+  color: rgb(255, 0, 0);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.button2 {
+  background-color: #0004ff;
+  border: none;
+  color: rgb(0, 47, 255);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.button3 {
+  background-color: #ffd900;
+  border: none;
+  color: rgb(255, 208, 0);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.button4 {
+  background-color: #2bff00;
+  border: none;
+  color: rgb(72, 255, 0);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
         #box1{
                     background-color: #ffffff;
                         width: 200px;
@@ -41,21 +86,24 @@
                         margin: 10px;
         }
             </style>
-</head>
-<body>
+<body></body>
     <div id='box1'>
-        <button onclick="stampaNumeri()"> red </button>
+        <button onclick="stampaNumeri()" class="button" > Button </button>
         <p>stampai numeri da uno a 100 con il ciclo for</p> 
+
     </div>
      
      <div id='box2'>
-       
+        <button onclick="stampaNumeri2()" class="button2" > Button </button>
+        <p>stampai numeri pari con il ciclo for</p> 
      </div>
      <div id='box3'>
-         
+        <button onclick="stampaNumeri3()" class="button3" > Button </button>
+        <p>stampai la tabellina del 9 fino al 1000 con il ciclo for</p> 
      </div>
      <div id='box4'>
-        
+        <button onclick="stampaNumeri4()" class="button4" > Button </button>
+        <p>stampa 10 numeri compresi tra 10 e 90 con il ciclo for</p> 
      </div>
 
      <script>
@@ -71,21 +119,24 @@
      </script>
 
     <script>
-         function stampaNumeri()
+         function stampaNumeri2()
          {
             let r="";
             for(let i=0;i<100;i++)
-            if(let i%2)
+            if(i%2===0)
             {
            r=r+" "+i;
             }  
-            document.getElementById("box1").innerHTML = r;
+            document.getElementById("box2").innerHTML = r;
          }
      </script>
-     
-
-     
-   
-   
+<script>
+        function stampaNumeri3()
+        {
+            let r="";
+           r=math.round(Math,round()*90)
+            document.getElementById("box3").innerHTML+r = r;
+        }
+    </script>
 </body>
 </html>
