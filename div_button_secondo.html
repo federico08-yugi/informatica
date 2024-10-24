@@ -8,7 +8,7 @@
         .button {
   background-color: #aa0404;
   border: none;
-  color: rgb(255, 0, 0);
+  color: rgb(34, 255, 0);
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -20,7 +20,7 @@
 .button2 {
   background-color: #0004ff;
   border: none;
-  color: rgb(0, 47, 255);
+  color: rgb(234, 255, 0);
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -32,7 +32,7 @@
 .button3 {
   background-color: #ffd900;
   border: none;
-  color: rgb(255, 208, 0);
+  color: rgb(43, 0, 255);
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -44,7 +44,7 @@
 .button4 {
   background-color: #2bff00;
   border: none;
-  color: rgb(72, 255, 0);
+  color: rgb(255, 0, 0);
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -103,7 +103,7 @@
      </div>
      <div id='box4'>
         <button onclick="stampaNumeri4()" class="button4" > Button </button>
-        <p>stampa 10 numeri compresi tra 10 e 90 con il ciclo for</p> 
+        <p>stampa 10 numeri compresi tra 1 e 90 con il ciclo for</p> 
      </div>
 
      <script>
@@ -133,9 +133,19 @@
 <script>
         function stampaNumeri3()
         {
-            let r="";
-           r=math.round(Math,round()*90)
-            document.getElementById("box3").innerHTML+r = r;
+        
+        }
+    </script>
+    <script>
+        function stampaNumeri4()
+        {
+           let r="";
+           for(let i=1; i<91; i++)
+           {
+               r=
+           }
+           
+           document.getElementById("box4").innerHTML = + r;
         }
     </script>
 </body>
