@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <style>
+    #demo{
+    color: rgb(0, 0, 0);
+  text-align: center;
+  text-decoration: none;
+  font-size: 70px;
+}
+   </style>
+</head>
+<body>
+   
+
+
+<p id="demo"></p>
+
+<script>
+    let contatore=0;
+const element = document.getElementById("demo");
+const temp1=setInterval( stampa1, 1000);
+
+function stampa1(){
+    contatore++;
+    element.innerHTML += contatore + " ";
+
+    if(contatore==10)
+    clearinterval(temp1);
+}
+</script>
+
+
+
+</body>
+</html>
