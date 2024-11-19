@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body Onload="myFunction()">
+
+<p>Click the button to demonstrate the prompt box.</p>
+
+<p id="demo"></p>
+
+
+<script>
+function myFunction() {
+  let person = prompt("inserisci la tua data di nascita", "anno-mese-giorno");
+  if (person != null) {
+    document.getElementById("demo").innerHTML =
+    "tu vivi dal " + person + "! ora hai ";
+    }
+}
+</script>
+
+<script>
+  let dateInitial=new Date('2024-11-19')
+  let dateFinal=new Date('2008-03-14')
+  function differenzadidate()
+  const dateDifferenceInDays = (dateInitial, dateFinal) =>
+  (dateFinal - dateInitial) / 86_400_000;
+</script>
+</body>
+</html>
