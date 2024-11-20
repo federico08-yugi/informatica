@@ -14,34 +14,45 @@
    </style>
 </head>
 <body>
-   
-
-
+  
+    <div id="counter" style="font-size: 24px;">100.00</div>
 <p id="demo"></p>
-
+<button id="stopButton">Ferma il contatore</button>
+<div id="results"></div>
 <script>
-    let contatore=100;
-const element = document.getElementById("demo");
-const temp1=setInterval( stampa1, 100);
-
-function stampa1(){
-    contatore--;
-    element.innerHTML += contatore + " ";
-
-    if(contatore==0)
-    {
-        clearInterval(temp1);
+    let contatore = 100.00;
+    const element = document.getElementById("demo");
+    const temp1 = setInterval(stampa1, 1000);
+    let count = 100.00;  // Contatore iniziale
+    const interval = 10; // 10 ms per centesimi
+    let intervalID;
+    let totalDifference = 0; // Somma delle differenze
+    const counterElement = document.getElementById('counter');
+    const resultsElement = document.getElementById('results');
+    const sumElement = document.getElementById('sumOfDifferences');
+    // Funzione per stampare il contatore
+    function stampa1() {
+        contatore--;
+        element.innerHTML = contatore + " ";
+        if (contatore == 0.00) {
+            clearInterval(temp1);
+        }
     }
-}
+
+    // Funzione per fermare il contatore dopo 10 secondi
+    function stopAfter10Seconds() {
+        setTimeout(() => {
+            clearInterval(temp1);
+            alert("Contatore fermato dopo 10 secondi!");
+        }, 10000); // 10000 millisecondi = 10 secondi
+    }
+
+    // Ascoltatore per il click del bottone
+    document.getElementById("stopButton").addEventListener("click", stopAfter10Seconds);
 </script>
 
-<button oneclick=" myfunction()">stop</button>
-<script>
-function myfunction(){if (contatore==90){setTimeout(temp1,5000)}}
-</script>
-<button oneclick="start()">start</button>
-<script>
-    function start(){if (contatore==80){setTimeout(temp1,5000)}}
-</script>
+</body>
+</html>
+
 </body>
 </html>
