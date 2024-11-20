@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ <style>
+    #demo{
+    color: rgb(0, 0, 0);
+  text-align: center;
+  text-decoration: none;
+  font-size: 70px;
+}
+   </style>
+</head>
+<body>
+   
+
+
+<p id="demo"></p>
+
+<script>
+    let contatore=100;
+const element = document.getElementById("demo");
+const temp1=setInterval( stampa1, 100);
+
+function stampa1(){
+    contatore--;
+    element.innerHTML += contatore + " ";
+
+    if(contatore==0)
+    {
+        clearInterval(temp1);
+    }
+}
+</script>
+
+<button oneclick=" myfunction()">stop</button>
+<script>
+function myfunction(){if (contatore==90){setTimeout(temp1,5000)}}
+</script>
+<button oneclick="start()">start</button>
+<script>
+    function start(){if (contatore==80){setTimeout(temp1,5000)}}
+</script>
+</body>
+</html>
