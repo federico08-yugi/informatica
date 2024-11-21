@@ -1,58 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
- <style>
-    #demo{
-    color: rgb(0, 0, 0);
-  text-align: center;
-  text-decoration: none;
-  font-size: 70px;
-}
-   </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contatore Decrementale</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    #timer {
+      font-size: 48px;
+      font-weight: bold;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+    #startButton {
+      font-size: 18px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  
-    <div id="counter" style="font-size: 24px;">100.00</div>
-<p id="demo"></p>
-<button id="stopButton">Ferma il contatore</button>
-<div id="results"></div>
-<script>
-    let contatore = 100.00;
-    const element = document.getElementById("demo");
-    const temp1 = setInterval(stampa1, 1000);
-    let count = 100.00;  // Contatore iniziale
-    const interval = 10; // 10 ms per centesimi
-    let intervalID;
-    let totalDifference = 0; // Somma delle differenze
-    const counterElement = document.getElementById('counter');
-    const resultsElement = document.getElementById('results');
-    const sumElement = document.getElementById('sumOfDifferences');
-    // Funzione per stampare il contatore
-    function stampa1() {
-        contatore--;
-        element.innerHTML = contatore + " ";
-        if (contatore == 0.00) {
-            clearInterval(temp1);
+
+  <div id="timer">100.00</div>
+  <button id="startButton">Inizia a premere!</button>
+  <div id="result"></div>
+
+  <script>
+    let timerValue = 100.00; // Iniziamo da 100.00
+    let interval;
+    let startTime;
+    let buttonPressedTime;
+    let milestones = [90, 80, 70, 60, 50, 40, 30, 20, 10, 0]; // I valori di riferimento
+    let pressedMilestone = false;
+
+    // Funzione per avviare il contatore
+    function startTimer() {
+      interval = setInterval(function() {
+        timerValue -= 0.01; // Decresce di 0.01 ogni intervallo (centisecondo)
+        if (timerValue <= 0) {
+          clearInterval(interval);
         }
+        document.getElementById("timer").textContent = timerValue.toFixed(2); // Mostra il timer con 2 decimali
+
+        // Verifica se il contatore ha raggiunto una delle tappe
+        if (milestones.includes(Math.floor(timerValue))) {
+          if (!pressedMilestone) {
+            pressedMilestone = true;
+            startTime = Date.now();
+          }
+        }
+      }, 10); // 10ms per ogni decremento (100 centisecondi)
     }
 
-    // Funzione per fermare il contatore dopo 10 secondi
-    function stopAfter10Seconds() {
-        setTimeout(() => {
-            clearInterval(temp1);
-            alert("Contatore fermato dopo 10 secondi!");
-        }, 10000); // 10000 millisecondi = 10 secondi
+    // Funzione per fermare il contatore e calcolare la differenza
+    function onButtonClick() {
+      if (!pressedMilestone) return; // Se non è mai stato premuto il bottone
+
+      // Tempo in millisecondi quando il bottone è stato premuto
+      buttonPressedTime = (Date.now() - startTime) / 1000; // Converto in secondi
+
+      // Calcolare la differenza tra il tempo ottimale e il tempo reale
+      let optimalTime = 90; // Tempo ottimale (per esempio 90.00 secondi)
+      let timeDifference = Math.abs(optimalTime - buttonPressedTime);
+
+      // Mostra i risultati
+      document.getElementById("result").innerHTML = `
+        Tempo premuto: ${buttonPressedTime.toFixed(2)} secondi<br>
+        Tempo ottimale: ${optimalTime} secondi<br>
+        Differenza: ${timeDifference.toFixed(2)} secondi
+      `;
     }
 
-    // Ascoltatore per il click del bottone
-    document.getElementById("stopButton").addEventListener("click", stopAfter10Seconds);
-</script>
+    // Aggiungi un evento per il bottone
+    document.getElementById("startButton").addEventListener("click", onButtonClick);
 
-</body>
-</html>
+    // Inizia il contatore
+    startTimer();
+  </script>
 
 </body>
 </html>
