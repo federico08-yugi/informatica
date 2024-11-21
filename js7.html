@@ -1,28 +1,59 @@
 <!DOCTYPE html>
-<html>
-<body Onload="myFunction()">
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calcolo Età in Giorni, Ore e Secondi</title>
 
-<p>Click the button to demonstrate the prompt box.</p>
+</head>
+<body>
 
-<p id="demo"></p>
+  <div class="container">
+    <h2>Calcolo Età</h2>
+    <p>Inserisci il tuo nome e la tua data di nascita per sapere da quanti giorni, ore e secondi sei in vita.</p>
+    
+    <label for="name">Nome:</label>
+    <input type="text" id="name" placeholder="Inserisci il tuo nome">
 
+    <label for="birthdate">Data di nascita:</label>
+    <input type="date" id="birthdate">
+    
+    <button onclick="calcolaEtà()">Calcola Età</button>
 
-<script>
-function myFunction() {
-  let person = prompt("inserisci la tua data di nascita", "anno-mese-giorno");
-  if (person != null) {
-    document.getElementById("demo").innerHTML =
-    "tu vivi dal " + person + "! ora hai ";
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calcolaEtà() {
+      // Otteniamo i valori di nome e data di nascita
+      const name = document.getElementById("name").value;
+      const birthdate = document.getElementById("birthdate").value;
+
+      if (!name || !birthdate) {
+        alert("Per favore, inserisci sia il tuo nome che la data di nascita!");
+        return;
+      }
+
+      // Calcoliamo la data attuale e la data di nascita
+      const oggi = new Date();
+      const dataNascita = new Date(birthdate);
+
+      // Calcoliamo la differenza in millisecondi
+      const diffMs = oggi - dataNascita;
+      
+      // Calcoliamo il numero di giorni, ore e secondi
+      const giorni = Math.floor(diffMs / (1000 * 60 * 60 * 24)); // giorni
+      const ore = Math.floor(diffMs / (1000 * 60 * 60)); // ore
+      const secondi = Math.floor(diffMs / 1000); // secondi
+
+      // Mostriamo il risultato
+      document.getElementById("result").innerHTML = `
+        Ciao, ${name}!<br>
+        Sei in vita da:<br>
+        <strong>${giorni}</strong> giorni, <strong>${ore}</strong> ore, <strong>${secondi}</strong> secondi.
+      `;
     }
-}
-</script>
+  </script>
 
-<script>
-  let dateInitial=new Date('2024-11-19')
-  let dateFinal=new Date('2008-03-14')
-  function differenzadidate()
-  const dateDifferenceInDays = (dateInitial, dateFinal) =>
-  (dateFinal - dateInitial) / 86_400_000;
-</script>
 </body>
 </html>
