@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestione Indici Array</title>
+    <script>
+        // Funzione che restituisce l'elemento dell'array in base all'indice
+        function getElement(indice) {
+            // Definiamo l'array morra
+            let morra = [10, 20, 30, 40, 50];
+            
+            // Controllo se l'indice è valido
+            if (indice < 0 || indice >= morra.length) {
+                return "Indice non valido";
+            } else {
+                return morra[indice];
+            }
+        }
+
+        // Funzione per visualizzare i risultati nel browser
+        function mostraRisultati() {
+            // Otteniamo gli indici dai campi di input
+            let primoIndice = 0;
+            let ultimoIndice = 4; // Indice dell'ultimo elemento (morra.length - 1)
+            let indiceFuoriLimite = 10; // Un indice che non esiste (fuori limite)
+
+            // Mostriamo i risultati nelle rispettive aree
+            document.getElementById("primoElemento").innerText = "Primo elemento: " + getElement(primoIndice);
+            document.getElementById("ultimoElemento").innerText = "Ultimo elemento: " + getElement(ultimoIndice);
+            document.getElementById("fuoriLimite").innerText = "Elemento fuori limite: " + getElement(indiceFuoriLimite);
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Gestione dell'Array "morra"</h1>
+
+    <!-- Bottone per attivare la funzione e visualizzare i risultati -->
+    <button onclick="mostraRisultati()">Mostra Risultati</button>
+
+    <div id="primoElemento"></div>
+    <div id="ultimoElemento"></div>
+    <div id="fuoriLimite"></div>
+
+</body>
+</html>
