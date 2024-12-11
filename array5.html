@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisi Numerica con Array</title>
+</head>
+<body>
+
+    <h1>Analisi Numerica con Array</h1>
+    <p>Numeri primi da 0 a 1000:</p>
+    <p id="out1"></p>
+    <p>Numeri non primi con fattori:</p>
+    <p id="out2"></p>
+
+    <script>
+        
+        function isPrime(n) {
+            if (n <= 1) return false;  
+            for (let i = 2; i <= Math.sqrt(n); i++) { 
+                if (n % i === 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        
+        function findFactors(n) {
+            let factors = [];
+            for (let i = 1; i <= n; i++) {
+                if (n % i === 0) {
+                    factors.push(i);
+                }
+            }
+            return factors;
+        }
+
+        let primi = [];
+        let nonPrimiConFattori = [];
+
+        
+        for (let i = 0; i <= 1000; i++) {
+            if (isPrime(i)) {
+                primi.push(i);
+            } else {
+                nonPrimiConFattori.push(`${i}: ${findFactors(i).join(', ')}`);  
+            }
+        }
+
+        document.getElementById("out1").innerHTML = primi.join(', ');
+
+        document.getElementById("out2").innerHTML = nonPrimiConFattori.join('<br>');
+
+    </script>
+
+</body>
+</html>
