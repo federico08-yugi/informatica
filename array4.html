@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,46 +11,35 @@
     <p>Lista generata:</p>
     <p id="out1"></p>
     <script>
-           // array visibile a tutto lo script
-          let numeri=[];
-        // il numero casuale viene inserito nell'array in posizione i;
-          function InserisceNumeroCasuale(i)
-          {    
-            let NumeroCausale=Math.floor(Math.random()*100);
-            numeri[i]=NumeroCausale;    
+          let numeri = [];
+
+          function InserisceNumeroCasuale(i) {
+              let NumeroCausale = Math.floor(Math.random() * 100);
+              numeri[i] = NumeroCausale;    
           }
-          InserisceNumeroCasuale(0);
-          InserisceNumeroCasuale(1);
-          InserisceNumeroCasuale(2);
-          InserisceNumeroCasuale(3);
-          InserisceNumeroCasuale(4);
-          document.getElementById("out1").innerHTML=numeri;
 
+         
+          for (let i = 0; i < 1000; i++) {
+              InserisceNumeroCasuale(i);
+          }
 
-          function isPrime(n)
-          {  
-            let prime=true;
+         
+          document.getElementById("out1").innerHTML = numeri.join(', ');
 
-            for(let i=2;i<=(n/2); i++)
-                {
-                if ((n%i)==0)
-                    {prime=false;}
-                }
-           return prime;
-
-
+          function isPrime(n) {  
+              let prime = true;
+              for (let i = 2; i <= (n / 2); i++) {
+                  if ((n % i) == 0) {
+                      prime = false;
+                      break;
+                  }
+              }
+              return prime;
           }
 
           console.log(isPrime(11));
 
-
-
-
-
-       
     </script>
 
-
-   
 </body>
 </html>
