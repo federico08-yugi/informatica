@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numeri Amicali</title>
+</head>
+<body>
+    <h1>Numeri Amicali da 1 a 100000</h1>
+    <button onclick="findAmicableNumbers()">Trova Numeri Amicali</button>
+    <pre id="output"></pre>
+
+    <script>
+        function sumOfDivisors(n) {
+            let sum = 0;
+            for (let i = 1; i <= Math.sqrt(n); i++) {
+                if (n % i === 0) {
+                    sum += i;
+                    if (i !== 1 && i !== n / i) {
+                        sum += n / i;
+                    }
+                }
+            }
+            return sum;
+        }
+
+        function findAmicableNumbers() {
+            let amicableNumbers = [];
+            const limit = 100000;
+
+            for (let a = 1; a <= limit; a++) {
+                let b = sumOfDivisors(a);
+                if (b > a && b <= limit) {
+                    if (sumOfDivisors(b) === a) {
+                        amicableNumbers.push([a, b]);
+                    }
+                }
+            }
+
+            displayAmicableNumbers(amicableNumbers);
+        }
+
+        function displayAmicableNumbers(amicableNumbers) {
+            let output = document.getElementById("output");
+            output.textContent = "";
+            amicableNumbers.forEach(pair => {
+                output.textContent += `(${pair[0]}, ${pair[1]})\n`;
+            });
+        }
+    </script>
+</body>
+</html>
