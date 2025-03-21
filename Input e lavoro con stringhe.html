@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Operations</title>
+    <script>
+        function calcolaLunghezza(idInput, idOutput) {
+            let valore = document.getElementById(idInput).value;
+            document.getElementById(idOutput).innerText = "Lunghezza: " + valore.length;
+        }
+       
+        function invertiStringa(idInput, idOutput) {
+            let valore = document.getElementById(idInput).value;
+            document.getElementById(idOutput).innerText = "Invertita: " + valore.split('').reverse().join('');
+        }
+       
+        function unisciStringhe() {
+            let str1 = document.getElementById("stringaA").value;
+            let str2 = document.getElementById("stringaB").value;
+            document.getElementById("outputUnione").innerText = "Unione: " + str1 + str2;
+        }
+       
+        function sommaLunghezze() {
+            let str1 = document.getElementById("stringaA").value;
+            let str2 = document.getElementById("stringaB").value;
+            let somma = str1.length + str2.length;
+            let messaggio = "Somma lunghezze: " + somma;
+            if (str2.length > 20) {
+                messaggio += " - b troppo lunga";
+            }
+            document.getElementById("outputSomma").innerText = messaggio;
+        }
+    </script>
+</head>
+<body>
+    <h2>Operazioni sulle stringhe</h2>
+    <label for="stringaA">Stringa A:</label>
+    <input type="text" id="stringaA" oninput="calcolaLunghezza('stringaA', 'outputLunghezzaA')">
+    <p id="outputLunghezzaA">Lunghezza: 0</p>
+    <button onclick="invertiStringa('stringaA', 'outputInvertitaA')">Inverti</button>
+    <p id="outputInvertitaA"></p>
+   
+    <label for="stringaB">Stringa B:</label>
+    <input type="text" id="stringaB" oninput="calcolaLunghezza('stringaB', 'outputLunghezzaB')">
+    <p id="outputLunghezzaB">Lunghezza: 0</p>
+    <button onclick="invertiStringa('stringaB', 'outputInvertitaB')">Inverti</button>
+    <p id="outputInvertitaB"></p>
+   
+    <button onclick="unisciStringhe()">Unisci</button>
+    <p id="outputUnione"></p>
+   
+    <button onclick="sommaLunghezze()">Somma Lunghezze</button>
+    <p id="outputSomma"></p>
+</body>
+</html>
