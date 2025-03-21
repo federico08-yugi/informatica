@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combinazioni Soggetti, Verbi e Complementi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 8px;
+            font-size: 14px;
+        }
+        #combinazioni {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            max-height: 400px;
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generatore di Combinazioni</h1>
+
+    <div>
+        <h2>Aggiungi Soggetti</h2>
+        <input type="text" id="soggettoInput" placeholder="Inserisci un soggetto">
+        <button onclick="aggiungiSoggetto()">Aggiungi Soggetto</button>
+    </div>
+
+    <div>
+        <h2>Aggiungi Verbi</h2>
+        <input type="text" id="verboInput" placeholder="Inserisci un verbo">
+        <button onclick="aggiungiVerbo()">Aggiungi Verbo</button>
+    </div>
+
+    <div>
+        <h2>Aggiungi Complementi</h2>
+        <input type="text" id="complementoInput" placeholder="Inserisci un complemento">
+        <button onclick="aggiungiComplemento()">Aggiungi Complemento</button>
+    </div>
+
+    <div>
+        <button onclick="generaCombinazioni()">Genera Prime 100 Combinazioni</button>
+    </div>
+
+    <div id="combinazioni"></div>
+
+    <script>
+        // Array iniziali precaricati
+        let soggetti = ["Mario", "Luca", "Giulia", "Anna", "Francesco", "Elena", "Roberto", "Sara", "Davide", "Chiara"];
+        let verbi = ["mangia", "corre", "legge", "scrive", "disegna", "parla", "cammina", "guarda", "ascolta", "gioca"];
+        let complemento = ["una mela", "nel parco", "un libro", "una lettera", "un quadro", "al telefono", "sul marciapiede", "la TV", "musica", "a calcio"];
+
+        // Funzione per aggiungere un soggetto
+        function aggiungiSoggetto() {
+            let input = document.getElementById('soggettoInput').value.trim();
+            if (input) {
+                soggetti.push(input);
+                document.getElementById('soggettoInput').value = ''; // Pulisce il campo di input
+            }
+        }
+
+        // Funzione per aggiungere un verbo
+        function aggiungiVerbo() {
+            let input = document.getElementById('verboInput').value.trim();
+            if (input) {
+                verbi.push(input);
+                document.getElementById('verboInput').value = ''; // Pulisce il campo di input
+            }
+        }
+
+        // Funzione per aggiungere un complemento
+        function aggiungiComplemento() {
+            let input = document.getElementById('complementoInput').value.trim();
+            if (input) {
+                complemento.push(input);
+                document.getElementById('complementoInput').value = ''; // Pulisce il campo di input
+            }
+        }
+
+        // Funzione per generare le prime 100 combinazioni
+        function generaCombinazioni() {
+            let combinazioni = [];
+            let count = 0;
+
+            for (let soggetto of soggetti) {
+                for (let verbo of verbi) {
+                    for (let compl of complemento) {
+                        combinazioni.push(`${soggetto} ${verbo} ${compl}`);
+                        count++;
+                        if (count >= 100) {
+                            break;
+                        }
+                    }
+                    if (count >= 100) break;
+                }
+                if (count >= 100) break;
+            }
+
+            // Visualizza le combinazioni in una lista
+            document.getElementById('combinazioni').innerHTML = combinazioni.join('<br>');
+        }
+    </script>
+</body>
+</html>
