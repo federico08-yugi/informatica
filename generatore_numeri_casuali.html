@@ -41,7 +41,7 @@
             let outputTesto = "";
             let medie = [];
            
-            for (let i = 0; i < 10000; i++) {
+            for (let i = 0; i < 500; i++) {
                 let numeroCasuale = Math.random() * (max - min) + min;
                 numeri.push(numeroCasuale);
                 outputTesto += numeroCasuale.toFixed(2) + " ";
@@ -61,6 +61,8 @@
             let somma = numeri.reduce((acc, num) => acc + num, 0);
             return somma / numeri.length;
         }
+        const cars = [numeroCasuale()];
+document.getElementById("demo").innerHTML = cars;
     </script>
 </body>
 </html>
