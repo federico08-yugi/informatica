@@ -33,12 +33,12 @@
   <canvas id="reaction-chart"></canvas>
 
   <script>
-    const totalRounds = Math.floor(Math.random() * 16) + 45; // da 45 a 60 round
-    const colorPoolSize = totalRounds * 4;
+    const totalRounds = 50; // Fissiamo a 50 round
     let reactionTimes = [];
     let currentRound = 0;
     let startTime = 0;
     let colors = [];
+    let correctColor = "";
 
     // Funzione per generare colori casuali
     function getRandomColor() {
@@ -75,7 +75,7 @@
 
       // Seleziona un colore corretto casualmente
       const correctIndex = Math.floor(Math.random() * 4);
-      const correctColor = colors[correctIndex];
+      correctColor = colors[correctIndex];
 
       // Mostra il colore corretto prima del round
       document.getElementById("correct-color").style.backgroundColor = correctColor;
@@ -128,24 +128,36 @@
       document.getElementById("correct-color").textContent = "";
 
       // Crea il grafico con i dati delle reazioni
-      createChart();
+      createChart(mean);
     }
 
     // Funzione per creare il grafico dei tempi di reazione
-    function createChart() {
+    function createChart(mean) {
       const ctx = document.getElementById('reaction-chart').getContext('2d');
       const chart = new Chart(ctx, {
-        type: 'line', // Puoi usare 'bar' se preferisci un grafico a barre
+        type: 'scatter', // Grafico a dispersione per punti
         data: {
           labels: Array.from({ length: totalRounds }, (_, i) => `Round ${i + 1}`),
-          datasets: [{
-            label: 'Tempi di Reazione (ms)',
-            data: reactionTimes.map(t => t.toFixed(2)),
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            fill: true,
-            lineTension: 0.1
-          }]
+          datasets: [
+            {
+              label: 'Tempi di Reazione (ms)',
+              data: reactionTimes.map((t, i) => ({ x: i + 1, y: t.toFixed(2) })),
+              borderColor: 'blue',
+              backgroundColor: 'blue',
+              pointRadius: 5,
+              showLine: false,
+            },
+            {
+              label: 'Media (Linea Rossa)',
+              data: Array(totalRounds).fill({ x: 1, y: mean }), // Linea orizzontale della media
+              borderColor: 'red',
+              backgroundColor: 'red',
+              fill: false,
+              borderWidth: 2,
+              tension: 0,
+              showLine: true,
+            }
+          ]
         },
         options: {
           responsive: true,
@@ -161,6 +173,9 @@
               title: {
                 display: true,
                 text: 'Round'
+              },
+              ticks: {
+                stepSize: 1
               }
             }
           }
