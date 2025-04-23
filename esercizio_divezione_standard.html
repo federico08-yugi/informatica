@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Test di Reazione - Trova il Colore Giusto</title>
+  <style>
+    .color-box {
+      width: 150px;
+      height: 150px;
+      margin: 10px;
+      cursor: pointer;
+    }
+    .image-container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 650px;
+    }
+    #reaction-chart {
+      max-width: 600px;
+      margin: 20px auto;
+    }
+  </style>
+  <!-- Aggiungi Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h2>Test di reazione: clicca sul colore corretto</h2>
+  <div class="image-container" id="colors"></div>
+  <p id="status"></p>
+  <p id="correct-color"></p>
+  <p id="result"></p>
+
+  <canvas id="reaction-chart"></canvas>
+
+  <script>
+    const totalRounds = Math.floor(Math.random() * 16) + 45; // da 45 a 60 round
+    const colorPoolSize = totalRounds * 4;
+    let reactionTimes = [];
+    let currentRound = 0;
+    let startTime = 0;
+    let colors = [];
+
+    // Funzione per generare colori casuali
+    function getRandomColor() {
+      const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+      return randomColor;
+    }
+
+    // Funzione per calcolare la media
+    function calculateMean(arr) {
+      return arr.reduce((a, b) => a + b, 0) / arr.length;
+    }
+
+    // Funzione per calcolare la varianza
+    function calculateVariance(arr, mean) {
+      return arr.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b, 0) / arr.length;
+    }
+
+    // Funzione per calcolare la deviazione standard
+    function calculateStandardDeviation(variance) {
+      return Math.sqrt(variance);
+    }
+
+    // Funzione per iniziare un round
+    function startRound() {
+      if (currentRound >= totalRounds) {
+        return showResults();
+      }
+
+      // Crea i colori per il round corrente
+      colors = [];
+      for (let i = 0; i < 4; i++) {
+        colors.push(getRandomColor());
+      }
+
+      // Seleziona un colore corretto casualmente
+      const correctIndex = Math.floor(Math.random() * 4);
+      const correctColor = colors[correctIndex];
+
+      // Mostra il colore corretto prima del round
+      document.getElementById("correct-color").style.backgroundColor = correctColor;
+      document.getElementById("correct-color").textContent = `Colore corretto: Clicca su questo colore`;
+
+      const container = document.getElementById("colors");
+      container.innerHTML = '';
+      colors.forEach((color, index) => {
+        const box = document.createElement("div");
+        box.style.backgroundColor = color;
+        box.classList.add("color-box");
+        box.onclick = () => handleClick(index === correctIndex, color);
+        container.appendChild(box);
+      });
+
+      // Avvia il timer per il round
+      startTime = performance.now();
+      document.getElementById("status").textContent = `Round ${currentRound + 1} di ${totalRounds}`;
+    }
+
+    // Funzione per gestire il clic dell'utente
+    function handleClick(isCorrect, color) {
+      if (isCorrect) {
+        const endTime = performance.now();
+        const reactionTime = endTime - startTime;
+        reactionTimes.push(reactionTime);
+        currentRound++;
+        setTimeout(startRound, 500); // breve pausa prima del prossimo round
+      } else {
+        document.getElementById("status").textContent = `Sbagliato! Riprova lo stesso round...`;
+      }
+    }
+
+    // Funzione per mostrare i risultati finali
+    function showResults() {
+      const mean = calculateMean(reactionTimes);
+      const variance = calculateVariance(reactionTimes, mean);
+      const stdDev = calculateStandardDeviation(variance);
+
+      const resultText = `
+        <strong>Risultati Finali</strong><br>
+        Totale round: ${totalRounds}<br>
+        Tempi di reazione (ms): ${reactionTimes.map(t => t.toFixed(2)).join(', ')}<br>
+        Media: ${mean.toFixed(2)} ms<br>
+        Varianza: ${variance.toFixed(2)}<br>
+        Deviazione standard: ${stdDev.toFixed(2)} ms
+      `;
+      document.getElementById("result").innerHTML = resultText;
+      document.getElementById("status").textContent = "Test completato!";
+      document.getElementById("correct-color").textContent = "";
+
+      // Crea il grafico con i dati delle reazioni
+      createChart();
+    }
+
+    // Funzione per creare il grafico dei tempi di reazione
+    function createChart() {
+      const ctx = document.getElementById('reaction-chart').getContext('2d');
+      const chart = new Chart(ctx, {
+        type: 'line', // Puoi usare 'bar' se preferisci un grafico a barre
+        data: {
+          labels: Array.from({ length: totalRounds }, (_, i) => `Round ${i + 1}`),
+          datasets: [{
+            label: 'Tempi di Reazione (ms)',
+            data: reactionTimes.map(t => t.toFixed(2)),
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            fill: true,
+            lineTension: 0.1
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Tempo (ms)'
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'Round'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // Avvia il test
+    window.onload = () => startRound();
+  </script>
+</body>
+</html>
