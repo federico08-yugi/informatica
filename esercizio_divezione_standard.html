@@ -34,11 +34,13 @@
 
   <script>
     const totalRounds = 50; // Fissiamo a 50 round
-    let reactionTimes = [];
+    let reactionTimes1 = [];  // Dati del primo ciclo
+    let reactionTimes2 = [];  // Dati del secondo ciclo
     let currentRound = 0;
     let startTime = 0;
     let colors = [];
     let correctColor = "";
+    let cycle = 1;  // Contatore dei cicli (1 per il primo ciclo, 2 per il secondo ciclo)
 
     // Funzione per generare colori casuali
     function getRandomColor() {
@@ -64,7 +66,13 @@
     // Funzione per iniziare un round
     function startRound() {
       if (currentRound >= totalRounds) {
-        return showResults();
+        if (cycle === 1) {
+          cycle = 2;  // Passiamo al secondo ciclo
+          currentRound = 0;
+          setTimeout(startRound, 500);  // Pausa prima di cominciare il secondo ciclo
+        } else {
+          return showResults();
+        }
       }
 
       // Crea i colori per il round corrente
@@ -101,7 +109,11 @@
       if (isCorrect) {
         const endTime = performance.now();
         const reactionTime = endTime - startTime;
-        reactionTimes.push(reactionTime);
+        if (cycle === 1) {
+          reactionTimes1.push(reactionTime);
+        } else {
+          reactionTimes2.push(reactionTime);
+        }
         currentRound++;
         setTimeout(startRound, 500); // breve pausa prima del prossimo round
       } else {
@@ -111,28 +123,38 @@
 
     // Funzione per mostrare i risultati finali
     function showResults() {
-      const mean = calculateMean(reactionTimes);
-      const variance = calculateVariance(reactionTimes, mean);
-      const stdDev = calculateStandardDeviation(variance);
+      const mean1 = calculateMean(reactionTimes1);
+      const mean2 = calculateMean(reactionTimes2);
+      const variance1 = calculateVariance(reactionTimes1, mean1);
+      const variance2 = calculateVariance(reactionTimes2, mean2);
+      const stdDev1 = calculateStandardDeviation(variance1);
+      const stdDev2 = calculateStandardDeviation(variance2);
 
       const resultText = `
         <strong>Risultati Finali</strong><br>
         Totale round: ${totalRounds}<br>
-        Tempi di reazione (ms): ${reactionTimes.map(t => t.toFixed(2)).join(', ')}<br>
-        Media: ${mean.toFixed(2)} ms<br>
-        Varianza: ${variance.toFixed(2)}<br>
-        Deviazione standard: ${stdDev.toFixed(2)} ms
+        Tempi di reazione ciclo 1 (ms): ${reactionTimes1.map(t => t.toFixed(2)).join(', ')}<br>
+        Media ciclo 1: ${mean1.toFixed(2)} ms<br>
+        Deviazione standard ciclo 1: ${stdDev1.toFixed(2)} ms<br><br>
+        Tempi di reazione ciclo 2 (ms): ${reactionTimes2.map(t => t.toFixed(2)).join(', ')}<br>
+        Media ciclo 2: ${mean2.toFixed(2)} ms<br>
+        Deviazione standard ciclo 2: ${stdDev2.toFixed(2)} ms
       `;
       document.getElementById("result").innerHTML = resultText;
       document.getElementById("status").textContent = "Test completato!";
       document.getElementById("correct-color").textContent = "";
 
+      // Avvia il reset del gioco dopo 1 minuto
+      setTimeout(() => {
+        resetGame();
+      }, 60000); // Dopo 1 minuto il gioco si resetta
+
       // Crea il grafico con i dati delle reazioni
-      createChart(mean);
+      createChart(mean1, mean2);
     }
 
     // Funzione per creare il grafico dei tempi di reazione
-    function createChart(mean) {
+    function createChart(mean1, mean2) {
       const ctx = document.getElementById('reaction-chart').getContext('2d');
       const chart = new Chart(ctx, {
         type: 'scatter', // Grafico a dispersione per punti
@@ -140,18 +162,36 @@
           labels: Array.from({ length: totalRounds }, (_, i) => `Round ${i + 1}`),
           datasets: [
             {
-              label: 'Tempi di Reazione (ms)',
-              data: reactionTimes.map((t, i) => ({ x: i + 1, y: t.toFixed(2) })),
+              label: 'Tempi di Reazione Ciclo 1 (ms)',
+              data: reactionTimes1.map((t, i) => ({ x: i + 1, y: t.toFixed(2) })),
               borderColor: 'blue',
               backgroundColor: 'blue',
               pointRadius: 5,
               showLine: false,
             },
             {
-              label: 'Media (Linea Rossa)',
-              data: Array(totalRounds).fill({ x: 1, y: mean }), // Linea orizzontale della media
+              label: 'Tempi di Reazione Ciclo 2 (ms)',
+              data: reactionTimes2.map((t, i) => ({ x: i + 1, y: t.toFixed(2) })),
+              borderColor: 'purple',
+              backgroundColor: 'purple',
+              pointRadius: 5,
+              showLine: false,
+            },
+            {
+              label: 'Media Ciclo 1',
+              data: Array(totalRounds).fill({ x: 1, y: mean1 }), // Linea orizzontale della media ciclo 1
               borderColor: 'red',
               backgroundColor: 'red',
+              fill: false,
+              borderWidth: 2,
+              tension: 0,
+              showLine: true,
+            },
+            {
+              label: 'Media Ciclo 2',
+              data: Array(totalRounds).fill({ x: 1, y: mean2 }), // Linea orizzontale della media ciclo 2
+              borderColor: 'orange',
+              backgroundColor: 'orange',
               fill: false,
               borderWidth: 2,
               tension: 0,
@@ -181,6 +221,16 @@
           }
         }
       });
+    }
+
+    // Funzione per resettare il gioco
+    function resetGame() {
+      currentRound = 0;
+      cycle = 1;
+      reactionTimes1 = [];
+      reactionTimes2 = [];
+      document.getElementById("result").innerHTML = "";
+      startRound();  // Riapre il ciclo 1
     }
 
     // Avvia il test
